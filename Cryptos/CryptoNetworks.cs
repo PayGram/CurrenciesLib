@@ -4,6 +4,7 @@
 	{
 		Standard = 0,
 		ERC20 = 1,
-		TRC20 = 2
+		TRC20 = 2,
+		BEP20 = 3,
 	}
 }

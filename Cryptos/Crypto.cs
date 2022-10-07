@@ -8,14 +8,13 @@ namespace CurrenciesLib.Cryptos
 		public readonly static Crypto ETH = new CryptoETH();// (CryptoCurrencies.ETH, CryptoNetworks.Standard, 18);
 		public readonly static Crypto BTC = new CryptoBTC();//(CryptoCurrencies.BTC, CryptoNetworks.Standard, 8);
 		public readonly static Crypto LTC = new CryptoLTC();//(CryptoCurrencies.LTC, CryptoNetworks.Standard, 8);
-		/// <summary> PGD on Standard network </summary>
-		public readonly static Crypto PGD = new CryptoPGD(CryptoNetworks.Standard);//(CryptoCurrencies.PGD, CryptoNetworks.Standard, 2);
-		/// <summary> USDT on Standard network </summary>
 		public readonly static Crypto USDT = new CryptoUSDT(CryptoNetworks.Standard);//(CryptoCurrencies.USDT, CryptoNetworks.Standard, 2);
 		public readonly static Crypto XMR = new CryptoXMR();//(CryptoCurrencies.XMR, CryptoNetworks.Standard, 12);
-		public readonly static Crypto XRP = new CryptoXRP();//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
+        public readonly static Crypto XRP = new CryptoXRP();//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
+        public readonly static Crypto PHPT = new CryptoPHPT(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
 
-		public CryptoNetworks Network { get; set; }
+
+        public CryptoNetworks Network { get; set; }
 		public CryptoCurrencies CryptoCurrencyId { get; set; }
 		public override CurrencyTypes CurrencyType => CurrencyTypes.Crypto;
 		/// <summary>
@@ -96,19 +95,19 @@ namespace CurrenciesLib.Cryptos
 			switch (crypto)
 			{
 				case CryptoCurrencies.BTC:
-					return new Crypto(crypto, network, Crypto.BTC.Precision);
+					return new Crypto(crypto, network, BTC.Precision);
 				case CryptoCurrencies.ETH:
-					return new Crypto(crypto, network, Crypto.ETH.Precision);
+					return new Crypto(crypto, network, ETH.Precision);
 				case CryptoCurrencies.LTC:
-					return new Crypto(crypto, network, Crypto.LTC.Precision);
+					return new Crypto(crypto, network, LTC.Precision);
 				case CryptoCurrencies.USDT:
-					return new Crypto(crypto, network, Crypto.USDT.Precision);
+					return new Crypto(crypto, network, USDT.Precision);
 				case CryptoCurrencies.XMR:
-					return new Crypto(crypto, network, Crypto.XMR.Precision);
+					return new Crypto(crypto, network, XMR.Precision);
 				case CryptoCurrencies.XRP:
-					return new Crypto(crypto, network, Crypto.XRP.Precision);
-				case CryptoCurrencies.PGD:
-					return new Crypto(crypto, network, Crypto.PGD.Precision);
+					return new Crypto(crypto, network, XRP.Precision);
+				case CryptoCurrencies.PHPT:
+					return new Crypto(crypto, network, PHPT.Precision);
 			}
 			return null;
 		}
