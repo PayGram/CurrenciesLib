@@ -129,12 +129,12 @@ namespace CurrenciesLib
 		/// <summary>
 		/// Gets the currency type from its string representation
 		/// </summary>
-		/// <param name="symbolAndOrNetwork"></param>
+		/// <param name="symbolAndNetwork">The currency and eventually the network.</param>
 		/// <returns></returns>
-		public static Currencies GetCurrency(string symbolAndOrNetwork)
+		public static Currencies GetCurrency(string symbolAndNetwork)
 		{
-			if (string.IsNullOrWhiteSpace(symbolAndOrNetwork)) return Currencies.UNKNOWN;
-			string[] nameNetwork = symbolAndOrNetwork.Split(Crypto.CRYPTO_NETWORK_SEPARATOR);
+			if (string.IsNullOrWhiteSpace(symbolAndNetwork)) return Currencies.UNKNOWN;
+			string[] nameNetwork = symbolAndNetwork.Split(Crypto.CRYPTO_NETWORK_SEPARATOR);
 			if (nameNetwork.Length == 0) return Currencies.UNKNOWN;
 			string name = nameNetwork[0];
 			if (Enum.TryParse<Currencies>(name, true, out Currencies res) && Enum.IsDefined(typeof(Currencies), res))
