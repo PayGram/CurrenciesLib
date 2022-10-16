@@ -13,7 +13,6 @@ namespace CurrenciesLib.ConversionProviders
 
 			var usd = new Dictionary<Currencies, Quote>();
 			usd.Add(Currencies.AED, new Quote() { BaseCurrency = Currencies.USD, QuoteCurrency = Currencies.AED, Midpoint = 3.6725m });
-			//usd.Add(Currencies.PGD, new Quote() { BaseCurrency = Currencies.USD, QuoteCurrency = Currencies.PGD, Midpoint = 1 });
 			usd.Add(Currencies.USDT, new Quote() { BaseCurrency = Currencies.USD, QuoteCurrency = Currencies.USDT, Midpoint = 1 });
 
 			FixedConversions.Add(Currencies.USD, usd);
