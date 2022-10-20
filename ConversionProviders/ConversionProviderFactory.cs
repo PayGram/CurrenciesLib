@@ -47,7 +47,7 @@ namespace CurrenciesLib.ConversionProviders
 		{
 			_expMillis = DEFAULT_QUOTE_EXPIRATION_MILLIS;
 			providers = new List<ICurrencyConversionProvider>();
-			RegisterConversionProvider(new USDFixedRateConversionProvider());
+			//RegisterConversionProvider(new USDFixedRateConversionProvider());
 			cacheProvider = new CacheConversionProvider();
 			RegisterConversionProvider(cacheProvider);
 		}
