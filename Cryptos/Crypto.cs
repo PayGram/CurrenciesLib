@@ -10,11 +10,11 @@ namespace CurrenciesLib.Cryptos
 		public readonly static Crypto LTC = new CryptoLTC();//(CryptoCurrencies.LTC, CryptoNetworks.Standard, 8);
 		public readonly static Crypto USDT = new CryptoUSDT(CryptoNetworks.Standard);//(CryptoCurrencies.USDT, CryptoNetworks.Standard, 2);
 		public readonly static Crypto XMR = new CryptoXMR();//(CryptoCurrencies.XMR, CryptoNetworks.Standard, 12);
-        public readonly static Crypto XRP = new CryptoXRP();//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
-        public readonly static Crypto PHPT = new CryptoPHPT(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
+		public readonly static Crypto XRP = new CryptoXRP();//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
+		public readonly static Crypto PHPT = new CryptoPHPT(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
 
 
-        public CryptoNetworks Network { get; set; }
+		public CryptoNetworks Network { get; set; }
 		public CryptoCurrencies CryptoCurrencyId { get; set; }
 		public override CurrencyTypes CurrencyType => CurrencyTypes.Crypto;
 		/// <summary>
@@ -111,7 +111,11 @@ namespace CurrenciesLib.Cryptos
 			}
 			return null;
 		}
-
+		public bool IsValidAddress(string address)
+		{
+			if (string.IsNullOrWhiteSpace(address)) return false;
+			return CryptoHelper.IsValidAddress(Network, address);
+		}
 		public static new Currency GetBySymbol(Currencies symbol)
 		{
 			return Crypto.GetBySymbolAndNetwork((CryptoCurrencies)symbol);

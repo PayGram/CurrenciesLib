@@ -10,8 +10,9 @@ namespace CurrenciesLib.Cryptos
 
 		public CryptoUSDT(CryptoNetworks network) : base(CryptoCurrencies.USDT, network, 2, 1)
 		{
-			if (network != CryptoNetworks.ERC20 && network != CryptoNetworks.Standard && network != CryptoNetworks.TRC20)
-				throw new Exception($"{network} is not supported for USDT");
+			//if (network != CryptoNetworks.ERC20 && network != CryptoNetworks.Standard && network != CryptoNetworks.TRC20)
+			//	throw new Exception($"{network} is not supported for USDT");
+			if (network == CryptoNetworks.Standard) network = CryptoNetworks.ERC20;
 			this.network = network;
 		}
 	}
