@@ -9,6 +9,6 @@
 		LTC = 8,
 		XMR = 9,
 		XRP = 10,
-        PHPT = 11,
-    }
+		PHPT = 11,
+	}
 }

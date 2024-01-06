@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CurrenciesLib.Cryptos
+﻿namespace CurrenciesLib.Cryptos
 {
 	public class CryptoUSDT : Crypto
 	{

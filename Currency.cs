@@ -240,7 +240,7 @@ namespace CurrenciesLib
 		/// <returns></returns>
 		public static double GetBaseMultiplier(Currencies curr)
 		{
-			switch(curr)
+			switch (curr)
 			{
 				case Currencies.BTC:
 					return 0.0001;
