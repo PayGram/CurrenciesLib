@@ -12,6 +12,8 @@ namespace CurrenciesLib.Cryptos
 		public readonly static Crypto XMR = new CryptoXMR();//(CryptoCurrencies.XMR, CryptoNetworks.Standard, 12);
 		public readonly static Crypto XRP = new CryptoXRP();//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
 		public readonly static Crypto PHPT = new CryptoPHPT(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
+		public readonly static Crypto BNB = new CryptoBNB(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
+		public readonly static Crypto TRX = new CryptoTRX(CryptoNetworks.TRC20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
 
 
 		public CryptoNetworks Network { get; set; }
@@ -108,6 +110,10 @@ namespace CurrenciesLib.Cryptos
 					return new Crypto(crypto, network, XRP.Precision);
 				case CryptoCurrencies.PHPT:
 					return new Crypto(crypto, network, PHPT.Precision);
+				case CryptoCurrencies.BNB:
+					return new Crypto(crypto, network, BNB.Precision);
+				case CryptoCurrencies.TRX:
+					return new Crypto(crypto, network, TRX.Precision);
 			}
 			return null;
 		}
