@@ -14,6 +14,8 @@
 		XMR = 9,
 		XRP = 10,
 		PHPT = 11,
+		BNB = 16,
+		TRX = 17,
 
 		EUR = 3,
 		USD = 4,
