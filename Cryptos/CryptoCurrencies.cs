@@ -10,5 +10,7 @@
 		XMR = 9,
 		XRP = 10,
 		PHPT = 11,
+		BNB = 16,
+		TRX = 17
 	}
 }
