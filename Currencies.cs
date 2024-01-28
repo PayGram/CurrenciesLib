@@ -16,6 +16,7 @@
 		PHPT = 11,
 		BNB = 16,
 		TRX = 17,
+		USDC = 18,
 
 		EUR = 3,
 		USD = 4,

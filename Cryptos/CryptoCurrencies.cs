@@ -11,6 +11,7 @@
 		XRP = 10,
 		PHPT = 11,
 		BNB = 16,
-		TRX = 17
+		TRX = 17,
+		USDC = 18,
 	}
 }

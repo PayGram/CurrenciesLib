@@ -2,12 +2,10 @@
 {
 	public class CryptoPHPT : Crypto
 	{
-		private CryptoNetworks network;
-		public override ushort Precision { get => 2; set { } }
-		public CryptoPHPT(CryptoNetworks network) : base(CryptoCurrencies.PHPT, network, 2)
+		public CryptoPHPT(CryptoNetworks network) : base(CryptoCurrencies.PHPT, network, 16)
 		{
-			if (network == CryptoNetworks.Standard) network = CryptoNetworks.BEP20;
-			this.network = network;
+			if (network == CryptoNetworks.Standard) 
+				Network = CryptoNetworks.BEP20;
 		}
 	}
 }
