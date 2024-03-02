@@ -5,18 +5,6 @@ namespace CurrenciesLib.Cryptos
 {
 	public class Crypto : Currency, ICrypto
 	{
-		public readonly static Crypto ETH = new CryptoETH();// (CryptoCurrencies.ETH, CryptoNetworks.Standard, 18);
-		public readonly static Crypto BTC = new CryptoBTC();//(CryptoCurrencies.BTC, CryptoNetworks.Standard, 8);
-		public readonly static Crypto LTC = new CryptoLTC();//(CryptoCurrencies.LTC, CryptoNetworks.Standard, 8);
-		public readonly static Crypto USDT = new CryptoUSDT(CryptoNetworks.Standard);//(CryptoCurrencies.USDT, CryptoNetworks.Standard, 2);
-		public readonly static Crypto XMR = new CryptoXMR();//(CryptoCurrencies.XMR, CryptoNetworks.Standard, 12);
-		public readonly static Crypto XRP = new CryptoXRP();//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
-		public readonly static Crypto PHPT = new CryptoPHPT(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
-		public readonly static Crypto BNB = new CryptoBNB(CryptoNetworks.BEP20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
-		public readonly static Crypto TRX = new CryptoTRX(CryptoNetworks.TRC20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
-		public readonly static Crypto USDC = new CryptoUSDC(CryptoNetworks.ERC20);//(CryptoCurrencies.XRP, CryptoNetworks.Standard, 6);
-
-
 		public CryptoNetworks Network { get; set; }
 		public CryptoCurrencies CryptoCurrencyId { get; set; }
 		public override CurrencyTypes CurrencyType => CurrencyTypes.Crypto;
@@ -34,15 +22,15 @@ namespace CurrenciesLib.Cryptos
 		/// <summary>
 		/// <inheritdoc/>
 		/// </summary>
-		public override ushort Precision { get; set; }
+		public override ushort Decimals { get; set; }
 
-		public Crypto(CryptoCurrencies crypto, CryptoNetworks network, ushort precision, decimal howManyForOneUSD = decimal.MinValue)
+		public Crypto(CryptoCurrencies crypto, CryptoNetworks network, ushort decimals, decimal howManyForOneUSD = decimal.MinValue)
 			: base(howManyForOneUSD)
 		{
 			base.CurrencyId = (Currencies)crypto;
 			this.CryptoCurrencyId = crypto;
 			this.Network = network;
-			this.Precision = precision;
+			this.Decimals = decimals;
 		}
 
 		/// <summary>
@@ -52,8 +40,8 @@ namespace CurrenciesLib.Cryptos
 		/// <returns><inheritdoc/></returns>
 		public virtual decimal GetValueFromSatoshi(decimal satoshi)
 		{
-			if (Precision == 0) return satoshi;
-			return satoshi / (decimal)Math.Pow(10, Precision);
+			if (Decimals == 0) return satoshi;
+			return satoshi / (decimal)Math.Pow(10, Decimals);
 		}
 
 		public const char CRYPTO_NETWORK_SEPARATOR = '_';
@@ -98,25 +86,27 @@ namespace CurrenciesLib.Cryptos
 			switch (crypto)
 			{
 				case CryptoCurrencies.BTC:
-					return new Crypto(crypto, network, BTC.Precision);
+					return new Crypto(crypto, network, CryptoBTC.DefaultDecimals);
 				case CryptoCurrencies.ETH:
-					return new Crypto(crypto, network, ETH.Precision);
+					return new Crypto(crypto, network, CryptoETH.DefaultDecimals);
 				case CryptoCurrencies.LTC:
-					return new Crypto(crypto, network, LTC.Precision);
+					return new Crypto(crypto, network, CryptoLTC.DefaultDecimals);
 				case CryptoCurrencies.USDT:
-					return new Crypto(crypto, network, USDT.Precision);
+					return new Crypto(crypto, network, CryptoUSDT.DefaultDecimals);
 				case CryptoCurrencies.XMR:
-					return new Crypto(crypto, network, XMR.Precision);
+					return new Crypto(crypto, network, CryptoXMR.DefaultDecimals);
 				case CryptoCurrencies.XRP:
-					return new Crypto(crypto, network, XRP.Precision);
+					return new Crypto(crypto, network, CryptoXRP.DefaultDecimals);
 				case CryptoCurrencies.PHPT:
-					return new Crypto(crypto, network, PHPT.Precision);
+					return new Crypto(crypto, network, CryptoPHPT.DefaultDecimals);
 				case CryptoCurrencies.BNB:
-					return new Crypto(crypto, network, BNB.Precision);
+					return new Crypto(crypto, network, CryptoBNB.DefaultDecimals);
 				case CryptoCurrencies.TRX:
-					return new Crypto(crypto, network, TRX.Precision);
+					return new Crypto(crypto, network, CryptoTRX.DefaultDecimals);
 				case CryptoCurrencies.USDC:
-					return new Crypto(crypto, network, USDC.Precision);
+					return new Crypto(crypto, network, CryptoUSDC.DefaultDecimals);
+				case CryptoCurrencies.FTN:
+					return new Crypto(crypto, network, CryptoFTN.DefaultDecimals);
 			}
 			return null;
 		}

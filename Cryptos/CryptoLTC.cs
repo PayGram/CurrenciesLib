@@ -2,7 +2,8 @@
 {
 	public class CryptoLTC : Crypto
 	{
-		public CryptoLTC() : base(CryptoCurrencies.LTC, CryptoNetworks.Standard, 8)
+		public static ushort DefaultDecimals = 8;
+		public CryptoLTC() : base(CryptoCurrencies.LTC, CryptoNetworks.Standard, DefaultDecimals)
 		{
 
 		}

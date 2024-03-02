@@ -35,7 +35,7 @@ namespace CurrenciesLib
 		/// </summary>
 		public decimal HowManyForOneUSD { get => _howManyForOneUSD <= 0 ? decimal.MinValue : _howManyForOneUSD; set { _howManyForOneUSD = value; } }
 		decimal _howManyForOneUSD;
-		public abstract ushort Precision { get; set; }
+		public abstract ushort Decimals { get; set; }
 
 		/// <summary>
 		/// 

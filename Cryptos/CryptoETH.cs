@@ -2,7 +2,8 @@
 {
 	public class CryptoETH : Crypto
 	{
-		public CryptoETH() : base(CryptoCurrencies.ETH, CryptoNetworks.Standard, 18)
+		public static ushort DefaultDecimals = 18;
+		public CryptoETH() : base(CryptoCurrencies.ETH, CryptoNetworks.Standard, DefaultDecimals)
 		{
 
 		}

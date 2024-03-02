@@ -2,7 +2,8 @@
 {
 	public class CryptoBNB : Crypto
 	{
-		public CryptoBNB(CryptoNetworks network) : base(CryptoCurrencies.PHPT, network, 18)
+		public static ushort DefaultDecimals = 18;
+		public CryptoBNB(CryptoNetworks network) : base(CryptoCurrencies.BNB, network, DefaultDecimals)
 		{
 			if (network == CryptoNetworks.Standard) 
 				Network = CryptoNetworks.BEP20;

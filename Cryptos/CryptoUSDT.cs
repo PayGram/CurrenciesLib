@@ -2,8 +2,8 @@
 {
 	public class CryptoUSDT : Crypto
 	{
-
-		public CryptoUSDT(CryptoNetworks network) : base(CryptoCurrencies.USDT, network, 16)
+		public static ushort DefaultDecimals = 6;
+		public CryptoUSDT(CryptoNetworks network) : base(CryptoCurrencies.USDT, network, DefaultDecimals)
 		{
 			if (network == CryptoNetworks.Standard) 
 				Network = CryptoNetworks.ERC20;

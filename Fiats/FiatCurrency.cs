@@ -12,12 +12,12 @@ namespace CurrenciesLib.Fiats
 
 		public override CurrencyTypes CurrencyType => CurrencyTypes.Fiat;
 		public override string Symbol => FiatCurrencyId.ToString();
-		public override ushort Precision { get; set; }
+		public override ushort Decimals { get; set; }
 
 		public FiatCurrency(FiatCurrencies currency, decimal howManyForOneUSD = decimal.MinValue)
 			: base(howManyForOneUSD)
 		{
-			Precision = 2;
+			Decimals = 2;
 			FiatCurrencyId = currency;
 			base.CurrencyId = (Currencies)currency;
 		}

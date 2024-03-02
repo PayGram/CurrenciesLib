@@ -2,7 +2,8 @@
 {
 	public class CryptoXMR : Crypto
 	{
-		public CryptoXMR() : base(CryptoCurrencies.XMR, CryptoNetworks.Standard, 12)
+		public static ushort DefaultDecimals = 12;
+		public CryptoXMR() : base(CryptoCurrencies.XMR, CryptoNetworks.Standard, DefaultDecimals)
 		{
 		}
 	}

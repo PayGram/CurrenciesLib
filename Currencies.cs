@@ -17,6 +17,7 @@
 		BNB = 16,
 		TRX = 17,
 		USDC = 18,
+		FTN = 19,
 
 		EUR = 3,
 		USD = 4,

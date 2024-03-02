@@ -2,7 +2,8 @@
 {
 	public class CryptoTRX : Crypto
 	{
-		public CryptoTRX(CryptoNetworks network) : base(CryptoCurrencies.PHPT, network, 6)
+		public static ushort DefaultDecimals = 6;
+		public CryptoTRX(CryptoNetworks network) : base(CryptoCurrencies.TRX, network, DefaultDecimals)
 		{
 			if (network == CryptoNetworks.Standard) 
 				Network = CryptoNetworks.TRC20;

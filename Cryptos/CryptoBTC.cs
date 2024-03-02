@@ -2,7 +2,8 @@
 {
 	public class CryptoBTC : Crypto
 	{
-		public CryptoBTC() : base(CryptoCurrencies.BTC, CryptoNetworks.Standard, 8)
+		public static ushort DefaultDecimals = 8;
+		public CryptoBTC() : base(CryptoCurrencies.BTC, CryptoNetworks.Standard, DefaultDecimals)
 		{
 
 		}

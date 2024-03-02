@@ -36,7 +36,7 @@ namespace CurrenciesLib
 		/// <summary>
 		/// The precision need for this currency. 
 		/// </summary>
-		ushort Precision { get; }
+		ushort Decimals { get; }
 		/// <summary>
 		/// Gets whether this currency is a cryptocurrency
 		/// </summary>
