@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrenciesLib.ConversionProviders
 {
@@ -15,6 +16,8 @@ namespace CurrenciesLib.ConversionProviders
 		/// the key is the base currency and the value is a dictionari of quote currency (dest currency) and quotes that we can convert to
 		/// </summary>
 		readonly Dictionary<Currencies, Dictionary<Currencies, TimedQuote>> quotes = new Dictionary<Currencies, Dictionary<Currencies, TimedQuote>>();
+
+		public List<TimedQuote> Quotes => quotes.Values.SelectMany(q => q.Values).ToList();
 
 		public CacheConversionProvider(ulong cacheExpMillis = ConversionProviderFactory.DEFAULT_QUOTE_EXPIRATION_MILLIS)
 		{
@@ -47,12 +50,12 @@ namespace CurrenciesLib.ConversionProviders
 			lock (sync)
 			{
 				// add or update the quote
-				var newq = new TimedQuote() { BaseCurrency = source, QuoteCurrency = dest, Midpoint = quote.Midpoint, UpdatedAtUTC = updatedAtUtc };
+				var newq = new TimedQuote() { BaseCurrency = source, QuoteCurrency = dest, Midpoint = quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
 				UpdateCache(newq);
 
 
 				// add or update the opposite quote
-				newq = new TimedQuote() { BaseCurrency = dest, QuoteCurrency = source, Midpoint = 1 / quote.Midpoint, UpdatedAtUTC = updatedAtUtc };
+				newq = new TimedQuote() { BaseCurrency = dest, QuoteCurrency = source, Midpoint = 1 / quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
 				UpdateCache(newq);
 			}
 		}

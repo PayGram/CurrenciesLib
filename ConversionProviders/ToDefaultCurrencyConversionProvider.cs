@@ -50,7 +50,8 @@ namespace CurrenciesLib.ConversionProviders
 				BaseCurrency = source,
 				QuoteCurrency = dest,
 				Midpoint = qs.Midpoint / qd.Midpoint,
-				UpdatedAtUTC = qs.UpdatedAtUTC < qd.UpdatedAtUTC ? qs.UpdatedAtUTC : qd.UpdatedAtUTC
+				UpdatedAtUTC = qs.UpdatedAtUTC < qd.UpdatedAtUTC ? qs.UpdatedAtUTC : qd.UpdatedAtUTC,
+				IsInferred = qs.IsInferred
 			};
 		}
 
@@ -80,7 +81,8 @@ namespace CurrenciesLib.ConversionProviders
 				BaseCurrency = source,
 				QuoteCurrency = dest,
 				Midpoint = qs.Midpoint / qd.Midpoint,
-				UpdatedAtUTC = qs.UpdatedAtUTC < qd.UpdatedAtUTC ? qs.UpdatedAtUTC : qd.UpdatedAtUTC
+				UpdatedAtUTC = qs.UpdatedAtUTC < qd.UpdatedAtUTC ? qs.UpdatedAtUTC : qd.UpdatedAtUTC,
+				IsInferred = qs.IsInferred
 			};
 		}
 
