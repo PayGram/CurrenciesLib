@@ -41,7 +41,7 @@ namespace CurrenciesLib.ConversionProviders
 			return quotes[source][dest];
 		}
 
-		public void UpdateCache(Quote quote, DateTime updatedAtUtc)
+		public void UpdateCache(Quote quote, DateTime updatedAtUtc, bool inferOpposite = true)
 		{
 			if (quote.Midpoint == 0) return;
 			var source = quote.BaseCurrency;
@@ -53,10 +53,12 @@ namespace CurrenciesLib.ConversionProviders
 				var newq = new TimedQuote() { BaseCurrency = source, QuoteCurrency = dest, Midpoint = quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
 				UpdateCache(newq);
 
-
-				// add or update the opposite quote
-				newq = new TimedQuote() { BaseCurrency = dest, QuoteCurrency = source, Midpoint = 1 / quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
-				UpdateCache(newq);
+				if (inferOpposite)
+				{
+					// add or update the opposite quote
+					newq = new TimedQuote() { BaseCurrency = dest, QuoteCurrency = source, Midpoint = 1 / quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
+					UpdateCache(newq);
+				}
 			}
 		}
 
@@ -80,7 +82,7 @@ namespace CurrenciesLib.ConversionProviders
 					var existing = quotes[source][dest];
 					if (existing.UpdatedAtUTC < newq.UpdatedAtUTC)
 					{
-						existing.UpdatedAtUTC = DateTime.UtcNow;
+						existing.UpdatedAtUTC = newq.UpdatedAtUTC;
 						existing.Midpoint = newq.Midpoint;
 					}
 				}
