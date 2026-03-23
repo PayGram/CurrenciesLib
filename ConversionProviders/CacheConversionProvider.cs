@@ -50,13 +50,13 @@ namespace CurrenciesLib.ConversionProviders
 			lock (sync)
 			{
 				// add or update the quote
-				var newq = new TimedQuote() { BaseCurrency = source, QuoteCurrency = dest, Midpoint = quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
+				var newq = new TimedQuote() { BaseCurrency = source, QuoteCurrency = dest, Midpoint = quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred, SpreadBuy = quote.SpreadBuy, SpreadSell = quote.SpreadSell };
 				UpdateCache(newq);
 
 				if (inferOpposite)
 				{
-					// add or update the opposite quote
-					newq = new TimedQuote() { BaseCurrency = dest, QuoteCurrency = source, Midpoint = 1 / quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred };
+					// add or update the opposite quote (swap buy/sell spread for opposite direction)
+					newq = new TimedQuote() { BaseCurrency = dest, QuoteCurrency = source, Midpoint = 1 / quote.Midpoint, UpdatedAtUTC = updatedAtUtc, IsInferred = quote.IsInferred, SpreadBuy = quote.SpreadSell, SpreadSell = quote.SpreadBuy };
 					UpdateCache(newq);
 				}
 			}
@@ -84,6 +84,8 @@ namespace CurrenciesLib.ConversionProviders
 					{
 						existing.UpdatedAtUTC = newq.UpdatedAtUTC;
 						existing.Midpoint = newq.Midpoint;
+						existing.SpreadBuy = newq.SpreadBuy;
+						existing.SpreadSell = newq.SpreadSell;
 					}
 				}
 				else

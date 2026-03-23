@@ -44,7 +44,7 @@ namespace CurrenciesLib.ConversionProviders
 			if (quote == null)
 				return decimal.MinValue;
 
-			return quote.BaseCurrency.Equals(source) ? quote.Midpoint * amount : amount / quote.Midpoint;
+			return ApplySpread(quote, source, amount);
 		}
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace CurrenciesLib.ConversionProviders
 			if (quote == null)
 				return decimal.MinValue;
 
-			return quote.BaseCurrency.Equals(source) ? quote.Midpoint * amount : amount / quote.Midpoint;
+			return ApplySpread(quote, source, amount);
 		}
 
 		/// <summary>
@@ -131,7 +131,22 @@ namespace CurrenciesLib.ConversionProviders
 		}
 
 		/// <summary>
-		/// When implemented in derived class gets a quote for the given pair or null if not found, 
+		/// Calculates the converted amount and applies spread if present.
+		/// </summary>
+		private static decimal ApplySpread(Quote quote, Currencies source, decimal amount)
+		{
+			bool isBuying = quote.BaseCurrency.Equals(source);
+			decimal result = isBuying ? quote.Midpoint * amount : amount / quote.Midpoint;
+
+			decimal spread = isBuying ? quote.SpreadBuy : quote.SpreadSell;
+			if (spread != 0)
+				result *= (1 - spread);
+
+			return result;
+		}
+
+		/// <summary>
+		/// When implemented in derived class gets a quote for the given pair or null if not found,
 		/// conditions of convertibility have already been checked
 		/// The returned Quote will have BaseCurrency=source and QuoteCurrency=dest
 		/// </summary>

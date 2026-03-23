@@ -18,6 +18,14 @@
 		/// True if this quote is inferred from other quotes, false if it was directly obtained from a conversion provider. Inferred quotes are less reliable than non-inferred ones, so they should be used only when no other quote is available.
 		/// </summary>
 		public bool IsInferred { get; set; } = true;
+		/// <summary>
+		/// Spread applied when user buys the QuoteCurrency (e.g., 0.02 = 2%)
+		/// </summary>
+		public decimal SpreadBuy { get; set; }
+		/// <summary>
+		/// Spread applied when user sells the QuoteCurrency (e.g., 0.02 = 2%)
+		/// </summary>
+		public decimal SpreadSell { get; set; }
 
 		public override string ToString()
 		{
