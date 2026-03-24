@@ -4,7 +4,7 @@
 	/// The Fiat currencies supported on this platform
 	/// </summary>
 	public enum FiatCurrencies
-	{
+	{ 
 		UNKNOWN = 0,
 		EUR = 3,
 		USD = 4,
