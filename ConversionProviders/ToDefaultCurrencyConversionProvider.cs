@@ -50,7 +50,9 @@ namespace CurrenciesLib.ConversionProviders
 				QuoteCurrency = dest,
 				Midpoint = qs.Midpoint / qd.Midpoint,
 				UpdatedAtUTC = qs.UpdatedAtUTC < qd.UpdatedAtUTC ? qs.UpdatedAtUTC : qd.UpdatedAtUTC,
-				IsInferred = qs.IsInferred
+				IsInferred = qs.IsInferred,
+				SpreadBuy = 1 - (1 - qs.SpreadBuy) * (1 - qd.SpreadSell),
+				SpreadSell = 1 - (1 - qd.SpreadBuy) * (1 - qs.SpreadSell),
 			};
 		}
 
@@ -81,7 +83,9 @@ namespace CurrenciesLib.ConversionProviders
 				QuoteCurrency = dest,
 				Midpoint = qs.Midpoint / qd.Midpoint,
 				UpdatedAtUTC = qs.UpdatedAtUTC < qd.UpdatedAtUTC ? qs.UpdatedAtUTC : qd.UpdatedAtUTC,
-				IsInferred = qs.IsInferred
+				IsInferred = qs.IsInferred,
+				SpreadBuy = 1 - (1 - qs.SpreadBuy) * (1 - qd.SpreadSell),
+				SpreadSell = 1 - (1 - qd.SpreadBuy) * (1 - qs.SpreadSell),
 			};
 		}
 
