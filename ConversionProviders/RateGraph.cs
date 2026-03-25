@@ -1,3 +1,4 @@
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,8 @@ namespace CurrenciesLib.ConversionProviders
 	/// </summary>
 	public class RateGraph : ConversionProvider
 	{
+		private static readonly ILog log = LogManager.GetLogger(typeof(RateGraph));
+
 		readonly object sync = new object();
 
 		/// <summary>
@@ -104,17 +107,21 @@ namespace CurrenciesLib.ConversionProviders
 				if (TryGetFreshEdge(source, dest, out var direct))
 				{
 					var q = ToTimedQuote(direct, source, dest);
-					Debug.WriteLine($"RateGraph direct: {q.BaseCurrency}/{q.QuoteCurrency} {q.Midpoint:#,##0.##}");
+					log.Debug($"RateGraph direct: {q.BaseCurrency}/{q.QuoteCurrency} {q.Midpoint:#,##0.##}");
 					return q;
 				}
 
 				// 2. BFS shortest path
 				var path = FindShortestPath(source, dest);
-				if (path == null) return null;
+				if (path == null)
+				{
+					log.Debug($"RateGraph no path: {source}/{dest}");
+					return null;
+				}
 
 				// 3. Compound along path
 				var result = CompoundPath(path, source, dest);
-				Debug.WriteLine($"RateGraph {path.Count}-hop: {result.BaseCurrency}/{result.QuoteCurrency} {result.Midpoint:#,##0.##}, sbuy: {result.SpreadBuy:0.00}, ssell: {result.SpreadSell:0.00}");
+				log.Debug($"RateGraph {path.Count}-hop: {result.BaseCurrency}/{result.QuoteCurrency} {result.Midpoint:#,##0.##}, sbuy: {result.SpreadBuy:0.00}, ssell: {result.SpreadSell:0.00}");
 				return result;
 			}
 		}
