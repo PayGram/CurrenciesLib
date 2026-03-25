@@ -8,19 +8,23 @@ namespace CurrenciesLib.ConversionProviders
 	{
 		public const ulong DEFAULT_QUOTE_EXPIRATION_MILLIS = 5 * 60 * 1000;
 		readonly static List<ICurrencyConversionProvider> providers;
-		readonly static CacheConversionProvider cacheProvider;
+		readonly static RateGraph rateGraph;
 
-		public static CacheConversionProvider CacheConversionProvider => cacheProvider;
+		/// <summary>
+		/// The graph-based rate provider. Backward-compatible: callers that used CacheConversionProvider
+		/// can use this property with the same UpdateCache/Quotes API.
+		/// </summary>
+		public static RateGraph CacheConversionProvider => rateGraph;
 
 		public static bool UseCache
 		{
-			get => providers.Contains(cacheProvider);
+			get => providers.Contains(rateGraph);
 			set
 			{
-				if (value && providers.Contains(cacheProvider) == false)
-					providers.Insert(0, cacheProvider);
+				if (value && providers.Contains(rateGraph) == false)
+					providers.Insert(0, rateGraph);
 				else if (value == false)
-					providers.Remove(cacheProvider);
+					providers.Remove(rateGraph);
 			}
 		}
 
@@ -39,7 +43,7 @@ namespace CurrenciesLib.ConversionProviders
 				else
 					_expMillis = value;
 
-				cacheProvider.CacheExpirationMillis = _expMillis;
+				rateGraph.CacheExpirationMillis = _expMillis;
 			}
 		}
 		static ulong _expMillis;
@@ -49,13 +53,13 @@ namespace CurrenciesLib.ConversionProviders
 			_expMillis = DEFAULT_QUOTE_EXPIRATION_MILLIS;
 			providers = new List<ICurrencyConversionProvider>();
 			//RegisterConversionProvider(new USDFixedRateConversionProvider());
-			cacheProvider = new CacheConversionProvider();
-			RegisterConversionProvider(cacheProvider);
+			rateGraph = new RateGraph();
+			RegisterConversionProvider(rateGraph);
 		}
 
 		public static void AddToCache(Quote q, DateTime updatedAtUtc)
 		{
-			cacheProvider.UpdateCache(q, updatedAtUtc);
+			rateGraph.UpdateCache(q, updatedAtUtc);
 		}
 
 		public static void RegisterConversionProvider(ICurrencyConversionProvider prov)

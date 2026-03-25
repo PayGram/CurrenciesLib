@@ -11,7 +11,7 @@ namespace CurrenciesLib.ConversionProviders
 		/// <param name="dest">The currency to convert the amount to</param>
 		/// <param name="amount">The amount to convert. If amount == decimal.MinValue or decimal.MaxValue, the same will be returned</param>
 		/// <returns>The converted amount expressed in dest currency</returns>
-		decimal Convert(Currencies source, Currencies dest, decimal amount, ConversionBag convStatus);
+		decimal Convert(Currencies source, Currencies dest, decimal amount);
 
 		/// <summary>
 		/// Asynchronously Converts an amount from the source currency to the destination currency
@@ -20,7 +20,7 @@ namespace CurrenciesLib.ConversionProviders
 		/// <param name="dest">The currency to convert the amount to</param>
 		/// <param name="amount">The amount to convert. If amount == decimal.MinValue or decimal.MaxValue, the same will be returned</param>
 		/// <returns>The converted amount expressed in dest currency</returns>
-		Task<decimal> ConvertAsync(Currencies source, Currencies dest, decimal amount, ConversionBag convStatus);
+		Task<decimal> ConvertAsync(Currencies source, Currencies dest, decimal amount);
 
 		/// <summary>
 		/// When implemented in a derived class it gets whether the currency conversion provider
@@ -34,7 +34,7 @@ namespace CurrenciesLib.ConversionProviders
 		/// provider that, for reasons unknown at the time of calling the method, will be offline when we try to 
 		/// do the conversion. In this case CanConvert will return true (theorically possible converting), but Convert
 		/// will eventually return decimal.MinValue</returns>
-		bool CanConvert(Currencies source, Currencies dest, ConversionBag convStatus);
+		bool CanConvert(Currencies source, Currencies dest);
 
 		/// <summary>
 		/// When implemented in derived class gets a quote for the given pair or null if not found, 
@@ -43,7 +43,7 @@ namespace CurrenciesLib.ConversionProviders
 		/// </summary>
 		/// <param name="source">The currency to convert from</param>
 		/// <param name="dest">The currency to convert to</param>
-		Task<TimedQuote> GetQuoteAsync(Currencies source, Currencies dest, ConversionBag convStatus);
+		Task<TimedQuote> GetQuoteAsync(Currencies source, Currencies dest);
 
 		/// <summary>
 		/// When implemented in derived class, asynchronously gets a quote for the given pair or null if not found, 
@@ -52,6 +52,6 @@ namespace CurrenciesLib.ConversionProviders
 		/// </summary>
 		/// <param name="source">The currency to convert from</param>
 		/// <param name="dest">The currency to convert to</param>
-		TimedQuote GetQuote(Currencies source, Currencies dest, ConversionBag convStatus);
+		TimedQuote GetQuote(Currencies source, Currencies dest);
 	}
 }

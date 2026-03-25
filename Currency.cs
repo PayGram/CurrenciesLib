@@ -55,7 +55,7 @@ namespace CurrenciesLib
 		public virtual decimal ConvertTo(Currencies destCurrency, decimal amount)
 		{
 			if (amount == decimal.Zero || amount == decimal.MinValue || amount == decimal.MaxValue) return amount;
-			return ConversionProviderFactory.GetConversionProvider().Convert(this.CurrencyId, destCurrency, amount, null);
+			return ConversionProviderFactory.GetConversionProvider().Convert(this.CurrencyId, destCurrency, amount);
 		}
 		/// <summary>
 		/// <inheritdoc/>
@@ -66,7 +66,7 @@ namespace CurrenciesLib
 		public virtual async Task<decimal> ConvertToAsync(Currencies destCurrency, decimal amount)
 		{
 			if (amount == decimal.Zero || amount == decimal.MinValue || amount == decimal.MaxValue) return amount;
-			return await ConversionProviderFactory.GetConversionProvider().ConvertAsync(this.CurrencyId, destCurrency, amount, null);
+			return await ConversionProviderFactory.GetConversionProvider().ConvertAsync(this.CurrencyId, destCurrency, amount);
 		}
 		/// <summary>
 		/// Asynchronously Converts an amount from the source currency to the destination currency using a specified conversionProvider
@@ -83,7 +83,7 @@ namespace CurrenciesLib
 			if (conversionProvider == null)
 				throw new NullReferenceException("conversionProvider cannot be null");
 
-			return conversionProvider.Convert(this.CurrencyId, destCurrency, amount, null);
+			return conversionProvider.Convert(this.CurrencyId, destCurrency, amount);
 		}
 		/// <summary>
 		/// Asynchronously Converts an amount from the source currency to the destination currency using a specified conversionProvider
@@ -98,7 +98,7 @@ namespace CurrenciesLib
 			if (conversionProvider == null)
 				throw new NullReferenceException("conversionProvider cannot be null");
 
-			return await conversionProvider.ConvertAsync(this.CurrencyId, destCurrency, amount, null);
+			return await conversionProvider.ConvertAsync(this.CurrencyId, destCurrency, amount);
 		}
 		/// <summary>
 		/// Gets a crypto or a fiat currency by its symbol 
@@ -184,7 +184,7 @@ namespace CurrenciesLib
 		public static async Task<decimal> ConvertAsync(Currencies srcCurrency, Currencies destCurrency, decimal amount)
 		{
 			if (amount == decimal.Zero || amount == decimal.MinValue || amount == decimal.MaxValue) return amount;
-			return await ConversionProviderFactory.GetConversionProvider().ConvertAsync(srcCurrency, destCurrency, amount, null);
+			return await ConversionProviderFactory.GetConversionProvider().ConvertAsync(srcCurrency, destCurrency, amount);
 		}
 		/// <summary>
 		/// Converts one currency to another one
@@ -196,7 +196,7 @@ namespace CurrenciesLib
 		public static decimal Convert(Currencies srcCurrency, Currencies destCurrency, decimal amount)
 		{
 			if (amount == decimal.Zero || amount == decimal.MinValue || amount == decimal.MaxValue) return amount;
-			return ConversionProviderFactory.GetConversionProvider().Convert(srcCurrency, destCurrency, amount, null);
+			return ConversionProviderFactory.GetConversionProvider().Convert(srcCurrency, destCurrency, amount);
 		}
 		public override int GetHashCode()
 		{
