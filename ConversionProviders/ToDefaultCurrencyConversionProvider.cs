@@ -29,7 +29,6 @@ namespace CurrenciesLib.ConversionProviders
 		/// </summary>
 		/// <param name="source"><inheritdoc/></param>
 		/// <param name="dest"><inheritdoc/></param>
-		/// <param name="amount"><inheritdoc/></param>
 		/// <returns><inheritdoc/></returns>
 		protected override TimedQuote getQuote(Currencies source, Currencies dest, ConversionBag convStatus)
 		{

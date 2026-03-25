@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrenciesLib.ConversionProviders
 {
@@ -70,6 +71,11 @@ namespace CurrenciesLib.ConversionProviders
 		public static ICurrencyConversionProvider GetConversionProvider(int i = 0)
 		{
 			return providers.Count > i ? providers[i] : null;
+		}
+
+		public static ICurrencyConversionProvider GetConversionProviderSkipCache()
+		{
+			return GetConversionProvider(1);
 		}
 
 		public static ICurrencyConversionProvider GetNext(ICurrencyConversionProvider curr)
