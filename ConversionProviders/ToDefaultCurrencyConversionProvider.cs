@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CurrenciesLib.ConversionProviders
@@ -44,7 +45,7 @@ namespace CurrenciesLib.ConversionProviders
 			var qd = ConversionProviderFactory.GetConversionProvider().GetQuote(dest, DefaultCurrency, convStatus);
 			if (qd == null) return null;
 
-			return new TimedQuote()
+			var ret = new TimedQuote()
 			{
 				BaseCurrency = source,
 				QuoteCurrency = dest,
@@ -54,6 +55,8 @@ namespace CurrenciesLib.ConversionProviders
 				SpreadBuy = 1 - (1 - qs.SpreadBuy) * (1 - qd.SpreadSell),
 				SpreadSell = 1 - (1 - qd.SpreadBuy) * (1 - qs.SpreadSell),
 			};
+			Debug.WriteLine($"To def prov: {ret.BaseCurrency}/{ret.QuoteCurrency} {ret.Midpoint:#,##0.##}, sbuy: {ret.SpreadBuy:0.00}, ssell: {ret.SpreadSell:0.00}");
+			return ret;
 		}
 
 		/// <summary>

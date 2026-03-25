@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CurrenciesLib.ConversionProviders
@@ -38,7 +39,9 @@ namespace CurrenciesLib.ConversionProviders
 
 		protected override TimedQuote getQuote(Currencies source, Currencies dest, ConversionBag convStatus)
 		{
-			return quotes[source][dest];
+			var ret = quotes[source][dest];
+			Debug.WriteLine($"Cache quote: {ret}");
+			return ret;
 		}
 
 		public void UpdateCache(Quote quote, DateTime updatedAtUtc, bool inferOpposite = true)
