@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace CurrenciesLib.ConversionProviders
 {
@@ -9,6 +10,11 @@ namespace CurrenciesLib.ConversionProviders
 		public const ulong DEFAULT_QUOTE_EXPIRATION_MILLIS = 5 * 60 * 1000;
 		readonly static List<ICurrencyConversionProvider> providers;
 		readonly static RateGraph rateGraph;
+
+		/// <summary>
+		/// Serializes rate mutations (SetRate API + background RatesUpdater) to prevent lost spread updates.
+		/// </summary>
+		public static readonly SemaphoreSlim RateLock = new(1, 1);
 
 		/// <summary>
 		/// The graph-based rate provider. Backward-compatible: callers that used CacheConversionProvider
