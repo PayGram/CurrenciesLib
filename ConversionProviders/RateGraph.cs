@@ -175,7 +175,7 @@ namespace CurrenciesLib.ConversionProviders
 
 			if (neighbors.TryGetValue(edge.To, out var existing))
 			{
-				if (forceUpdate || existing.UpdatedAtUTC < edge.UpdatedAtUTC)
+				if (forceUpdate || existing.UpdatedAtUTC <= edge.UpdatedAtUTC)
 				{
 					existing.Midpoint = edge.Midpoint;
 					existing.SpreadBuy = edge.SpreadBuy;
