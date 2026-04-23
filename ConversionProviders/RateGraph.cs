@@ -276,6 +276,15 @@ namespace CurrenciesLib.ConversionProviders
 			};
 		}
 
+		public void InvalidateInferredQuotes()
+		{
+			var quotes = Quotes;
+			foreach (var quote in quotes)
+			{
+				if (quote.IsInferred && !quote.IsFixed)
+					InvalidateQuote(quote);
+			}
+		}
 		#endregion
 
 		/// <summary>

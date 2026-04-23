@@ -1,7 +1,11 @@
-﻿namespace CurrenciesLib
+﻿using Microsoft.VisualBasic;
+using System;
+using System.Text.Json.Serialization;
+
+namespace CurrenciesLib
 {
 	public class Quote
-	{
+	{   
 		/// <summary>
 		/// The first currency in the pair. The price of the base currency is always calculated in units of the quote currency.
 		/// </summary>
@@ -29,7 +33,7 @@
 
 		public override string ToString()
 		{
-			return $"{BaseCurrency}/{QuoteCurrency}:{Midpoint}";
+			return $"{BaseCurrency}/{QuoteCurrency}:{Midpoint:0.####}";
 		}
 	}
 
